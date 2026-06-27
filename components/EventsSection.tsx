@@ -7,59 +7,48 @@ import ScrollReveal from './ui/ScrollReveal'
 
 const EVENTS = [
   {
-    day: 3,
-    month: 'JUL',
-    year: 2026,
-    title: 'Sangeet',
-    date: 'Friday, 6:00 PM Onwards',
-    description: 'An evening of music, dance and unlimited fun!',
-    image: 'https://picsum.photos/seed/sangeet-event/280/190',
-    icon: <MusicIcon />,
-  },
-  {
     day: 4,
     month: 'JUL',
     year: 2026,
-    title: 'Mehendi',
-    date: 'Saturday, 10:00 AM Onwards',
-    description: "Let's celebrate love with colors of mehendi.",
-    image: 'https://picsum.photos/seed/mehendi-event/280/190',
-    icon: <HennaIcon />,
+    title: 'Haldi',
+    date: 'Saturday, 4:00 PM Onwards',
+    venue: 'My Sweet Home, Katangur, Telangana 508205',
+    description: 'A joyful celebration filled with turmeric, blessings, and laughter.',
+    image: '/images/Haldi.png',
+    icon: <HaldiIcon />,
   },
   {
     day: 5,
     month: 'JUL',
     year: 2026,
     title: 'Wedding',
-    date: 'Sunday, 9:30 AM Onwards',
+    date: 'Sunday, 10:33 AM Onwards',
     venue: 'Near Shivaji Statue, Ashallapally, Warangal',
     description: "The prettiest day to say 'I do' and begin forever.",
-    image: 'https://picsum.photos/seed/wedding-ceremony/280/190',
+    image: '/images/Wedding.png',
     icon: <TempleIcon />,
   },
   {
-    day: 5,
+    day: 6,
     month: 'JUL',
     year: 2026,
     title: 'Reception',
-    date: 'Sunday, 7:00 PM Onwards',
-    venue: 'Near Shivaji Statue, Ashallapally, Warangal',
+    date: 'Monday, 1:00 PM Onwards',
+    venue: 'MSR Function Hall, Katangur, Telangana 508205',
     description: 'An evening to celebrate their new beginning.',
-    image: 'https://picsum.photos/seed/reception-event/280/190',
+    image: '/images/Reception.png',
     icon: <CelebIcon />,
   },
 ]
 
 export default function EventsSection() {
   return (
-    <section id="events" className="relative py-24 md:py-32 bg-bg overflow-hidden">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse 60% 40% at 50% 50%, rgba(212,175,55,0.03) 0%, transparent 70%)',
-        }}
-      />
+    <section id="events" className="relative py-24 md:py-32 overflow-hidden">
+      {/* Background image with floral panels */}
+      <div className="absolute inset-0">
+        <Image src="/images/Gallery_Bg.png" alt="" fill className="object-cover object-center" aria-hidden="true" />
+        <div className="absolute inset-0 bg-bg/72" />
+      </div>
 
       <div className="max-w-4xl mx-auto px-4 relative z-10">
         <ScrollReveal>
@@ -87,112 +76,110 @@ function EventCard({ event, index }: { event: (typeof EVENTS)[number]; index: nu
           '0 16px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,175,55,0.45), 0 0 28px rgba(212,175,55,0.12)',
       }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
-      className="flex items-stretch gap-0 rounded-2xl border border-[rgba(212,175,55,0.25)] bg-card overflow-hidden shadow-card"
+      className="relative flex items-stretch gap-0 rounded-2xl border border-[rgba(212,175,55,0.45)] overflow-hidden"
+      style={{ boxShadow: '0 6px 32px rgba(0,0,0,0.35), 0 1px 0 rgba(212,175,55,0.2) inset' }}
     >
+      {/* Texture background */}
+      <Image
+        src="/images/event_texture.png"
+        alt=""
+        fill
+        className="object-cover object-center"
+        aria-hidden="true"
+      />
+
       {/* Date badge */}
       <div
-        className="flex-shrink-0 flex flex-col items-center justify-center px-5 py-6 min-w-[80px]"
+        className="relative z-10 flex-shrink-0 flex flex-col items-center justify-center px-5 py-6 min-w-[80px]"
         style={{
-          background:
-            'linear-gradient(180deg, rgba(212,175,55,0.12) 0%, rgba(212,175,55,0.05) 100%)',
-          borderRight: '1px solid rgba(212,175,55,0.2)',
+          background: 'linear-gradient(180deg, rgba(212,175,55,0.22) 0%, rgba(180,120,50,0.14) 100%)',
+          borderRight: '1px solid rgba(212,175,55,0.35)',
         }}
       >
-        <span className="font-cinzel text-3xl font-bold text-gold leading-none">{event.day}</span>
-        <span className="font-cinzel text-[10px] tracking-[0.2em] text-gold/70 mt-1">{event.month}</span>
-        <span className="font-cinzel text-[9px] tracking-wider text-warm-text/40 mt-0.5">{event.year}</span>
+        <span className="font-cinzel text-3xl font-bold text-[#7a4a10] leading-none">{event.day}</span>
+        <span className="font-cinzel text-[10px] tracking-[0.2em] text-[#7a4a10]/80 mt-1">{event.month}</span>
+        <span className="font-cinzel text-[9px] tracking-wider text-[#5c3418] mt-0.5">{event.year}</span>
       </div>
 
       {/* Content */}
-      <div className="flex-1 flex items-center gap-4 p-5 md:p-6">
+      <div className="relative z-10 flex-1 flex items-center gap-4 p-5 md:p-6">
         {/* Icon */}
         <div
           className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center"
           style={{
-            background:
-              'radial-gradient(circle, rgba(212,175,55,0.2) 0%, rgba(212,175,55,0.06) 100%)',
-            border: '1px solid rgba(212,175,55,0.35)',
+            background: 'radial-gradient(circle, rgba(212,175,55,0.35) 0%, rgba(180,120,50,0.15) 100%)',
+            border: '1.5px solid rgba(212,175,55,0.6)',
           }}
         >
           {event.icon}
         </div>
 
         <div className="flex-1 min-w-0">
-          <h3 className="font-cormorant text-xl md:text-2xl font-semibold text-gold leading-tight mb-1">
+          <h3 className="font-cormorant text-2xl md:text-3xl font-bold text-[#2c1206] leading-tight mb-1">
             {event.title}
           </h3>
-          <p className="font-cinzel text-[9px] md:text-[10px] tracking-[0.2em] text-warm-text/50 uppercase mb-1.5">
+          <p className="font-cinzel text-[9px] md:text-[10px] tracking-[0.2em] text-[#5c3418] uppercase mb-1.5">
             {event.date}
           </p>
           {'venue' in event && event.venue && (
-            <p className="flex items-center gap-1.5 font-inter text-[10px] text-gold/60 mb-2">
+            <p className="flex items-center gap-1.5 font-inter text-[10px] text-[#7a4520] mb-2">
               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
               {event.venue}
             </p>
           )}
-          <p className="font-inter text-xs md:text-sm text-warm-text/65 leading-relaxed">
+          <p className="font-inter text-xs md:text-sm text-[#3d2010] leading-relaxed">
             {event.description}
           </p>
         </div>
       </div>
 
-      {/* Event image */}
-      <div className="flex-shrink-0 relative hidden sm:block" style={{ width: '160px', minHeight: '110px' }}>
+      {/* Event image — mask fades it into the texture with no hard edge */}
+      <div
+        className="relative z-10 flex-shrink-0 hidden sm:block"
+        style={{
+          width: '180px',
+          minHeight: '110px',
+          maskImage: 'linear-gradient(to right, transparent 0%, black 22%)',
+          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 22%)',
+        }}
+      >
         <Image
           src={event.image}
           alt={event.title}
           fill
-          className="object-cover transition-transform duration-500 hover:scale-105"
-          style={{
-            filter: 'sepia(20%) saturate(120%) brightness(0.88)',
-            borderLeft: '1px solid rgba(212,175,55,0.18)',
-          }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{ background: 'linear-gradient(to right, rgba(27,19,15,0.4) 0%, transparent 40%)' }}
+          className="object-cover transition-transform duration-700 hover:scale-105"
+          style={{ filter: 'sepia(15%) saturate(115%) brightness(0.9)' }}
         />
       </div>
     </motion.div>
   )
 }
 
-function MusicIcon() {
+function HaldiIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4af37" strokeWidth="1.8" strokeLinecap="round">
-      <path d="M9 18V5l12-2v13" />
-      <circle cx="6" cy="18" r="3" />
-      <circle cx="18" cy="16" r="3" />
-    </svg>
-  )
-}
-
-function HennaIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4af37" strokeWidth="1.8" strokeLinecap="round">
-      <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0" />
-      <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2" />
-      <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8" />
-      <path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4af37" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="2.5" />
+      <path d="M12 9.5C10.5 7 10 4.5 12 3C14 4.5 13.5 7 12 9.5Z" />
+      <path d="M14.5 12C17 10.5 19.5 10 21 12C19.5 14 17 13.5 14.5 12Z" />
+      <path d="M12 14.5C13.5 17 14 19.5 12 21C10 19.5 10.5 17 12 14.5Z" />
+      <path d="M9.5 12C7 13.5 4.5 14 3 12C4.5 10 7 10.5 9.5 12Z" />
     </svg>
   )
 }
 
 function TempleIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4af37" strokeWidth="1.8" strokeLinecap="round">
-      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-      <polyline points="9 22 9 12 15 12 15 22" />
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4af37" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="8.5" cy="12" r="5.5" />
+      <circle cx="15.5" cy="12" r="5.5" />
     </svg>
   )
 }
 
 function CelebIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4af37" strokeWidth="1.8" strokeLinecap="round">
-      <path d="M8 22l4-11 4 11" />
-      <path d="M12 11C12 11 8 7 8 4a4 4 0 0 1 8 0c0 3-4 7-4 7z" />
-      <line x1="6" y1="22" x2="18" y2="22" />
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4af37" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 2L13.5 10.5L22 12L13.5 13.5L12 22L10.5 13.5L2 12L10.5 10.5Z" />
     </svg>
   )
 }

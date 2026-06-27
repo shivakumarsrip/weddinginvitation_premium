@@ -7,13 +7,13 @@ import ScrollReveal from './ui/ScrollReveal'
 
 const COUPLE = [
   {
-    name: 'Shiva Kumar',
+    name: 'Sunkaraboina ShivaKumar',
     image: '/images/groom.PNG',
     description: 'He found his calm in her smile and knew he had found his home.',
     side: 'left',
   },
   {
-    name: 'Soujanya',
+    name: 'Nyala Soujanya',
     image: '/images/bride.PNG',
     description: 'She found her forever in his heart and knew her journey was complete.',
     side: 'right',
@@ -22,17 +22,11 @@ const COUPLE = [
 
 export default function CoupleSection() {
   return (
-    <section id="couple" className="relative py-24 md:py-32 bg-bg overflow-hidden">
-      {/* Subtle radial glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-bg to-transparent" />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              'radial-gradient(ellipse 70% 50% at 50% 50%, rgba(212,175,55,0.04) 0%, transparent 70%)',
-          }}
-        />
+    <section id="couple" className="relative py-24 md:py-32 overflow-hidden">
+      {/* Background image with floral panels */}
+      <div className="absolute inset-0">
+        <Image src="/images/Gallery_Bg.png" alt="" fill className="object-cover object-center" aria-hidden="true" />
+        <div className="absolute inset-0 bg-bg/72" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 relative z-10">

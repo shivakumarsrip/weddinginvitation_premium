@@ -1,7 +1,10 @@
+import fs from 'fs'
+import path from 'path'
 import type { Metadata } from 'next'
 import { Cormorant_Garamond, Corinthia, Inter, Cinzel } from 'next/font/google'
 import './globals.css'
 import SmoothScrollProvider from '@/components/SmoothScrollProvider'
+import { siteConfig } from '@/lib/site-config'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -32,16 +35,51 @@ const cinzel = Cinzel({
   display: 'swap',
 })
 
+// Use the custom thumbnail if it exists, otherwise fall back to the hero image.
+function resolveOgImage(): string {
+  const primaryAbs = path.join(process.cwd(), 'public', siteConfig.ogImage.replace(/^\//, ''))
+  return fs.existsSync(primaryAbs) ? siteConfig.ogImage : siteConfig.ogImageFallback
+}
+
+const ogImage = resolveOgImage()
+
 export const metadata: Metadata = {
-  title: 'Shiva Kumar & Soujanya — Wedding Invitation',
-  description:
-    'You are cordially invited to celebrate the auspicious union of Shiva Kumar & Soujanya on 5th July 2026 at Warangal, Telangana.',
-  keywords: ['wedding', 'invitation', 'Shiva Kumar', 'Soujanya', 'July 2026', 'Warangal', 'Telangana'],
+  // metadataBase makes all relative image paths absolute, which social crawlers require.
+  metadataBase: new URL(siteConfig.url),
+
+  title: siteConfig.ogTitle,
+  description: siteConfig.ogDescription,
+  keywords: ['wedding', 'invitation', siteConfig.groom, siteConfig.bride, siteConfig.weddingDate, siteConfig.venue],
+
+  // ── Open Graph (Facebook, WhatsApp, LinkedIn, Telegram, Discord, Slack) ──
   openGraph: {
-    title: 'Shiva Kumar & Soujanya — Wedding Invitation',
-    description: 'Two hearts, one promise. Join us on 5th July 2026.',
+    title: siteConfig.ogTitle,
+    description: siteConfig.ogDescription,
     type: 'website',
+    url: siteConfig.url,
+    siteName: `${siteConfig.groom} & ${siteConfig.bride} Wedding`,
+    locale: 'en_US',
+    images: [
+      {
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.groom} & ${siteConfig.bride} Wedding Invitation`,
+      },
+    ],
   },
+
+  // ── Twitter / X Card ──────────────────────────────────────────────────────
+  twitter: {
+    card: 'summary_large_image',
+    title: siteConfig.ogTitle,
+    description: siteConfig.ogDescription,
+    images: [ogImage],
+  },
+
+  // ── General SEO ───────────────────────────────────────────────────────────
+  robots: { index: false, follow: false }, // private invitation — keep off search engines
+  icons: { icon: '/favicon.ico' },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

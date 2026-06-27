@@ -2,118 +2,145 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Navigation } from 'lucide-react'
+import { Navigation, MapPin, Clock, Calendar } from 'lucide-react'
 import SectionTitle from './ui/SectionTitle'
 import ScrollReveal from './ui/ScrollReveal'
 
+const VENUES = [
+  {
+    label: 'Wedding Ceremony',
+    date: 'Sunday, 5th July 2026',
+    time: '10:33 AM onwards',
+    name: 'Koochana Gardens',
+    lines: [
+      'Ashalapally Cross Road',
+      'Vill: Ashalapally, Mdl: Sangem',
+      'Dist: Warangal, Telangana',
+    ],
+    mapSrc:
+      'https://maps.google.com/maps?q=Koochana+Gardens,Ashalapally,Sangem,Warangal,Telangana&z=14&output=embed',
+    mapsHref:
+      'https://maps.google.com/?q=Koochana+Gardens,Ashalapally,Sangem,Warangal,Telangana',
+  },
+  {
+    label: 'Wedding Reception',
+    date: 'Monday, 6th July 2026',
+    time: '1:00 PM onwards',
+    name: 'MSR Function Hall',
+    lines: [
+      'Eduloor Road, Katangur',
+      'Dist: Nalgonda',
+      'Telangana 508205',
+    ],
+    mapSrc:
+      'https://maps.google.com/maps?q=58C7%2BC42+Katangur+Telangana&z=16&output=embed',
+    mapsHref:
+      'https://maps.google.com/?q=58C7%2BC42+Katangur+Telangana',
+  },
+]
+
 const VENUE_FEATURES = [
-  {
-    icon: <AccessIcon />,
-    title: 'Easy Accessibility',
-    subtitle: 'Well Connected',
-  },
-  {
-    icon: <ParkingIcon />,
-    title: 'Ample Parking',
-    subtitle: 'Available',
-  },
-  {
-    icon: <ComfortIcon />,
-    title: 'Guest Comfort',
-    subtitle: 'Our Priority',
-  },
-  {
-    icon: <StarIcon />,
-    title: 'Memorable Experience',
-    subtitle: 'Guaranteed',
-  },
+  { icon: <AccessIcon />, title: 'Easy Accessibility', subtitle: 'Well Connected' },
+  { icon: <ParkingIcon />, title: 'Ample Parking', subtitle: 'Available' },
+  { icon: <ComfortIcon />, title: 'Guest Comfort', subtitle: 'Our Priority' },
+  { icon: <StarIcon />, title: 'Memorable Experience', subtitle: 'Guaranteed' },
 ]
 
 export default function VenueSection() {
   return (
-    <section id="venue" className="relative py-24 md:py-32 bg-bg overflow-hidden">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse 65% 45% at 50% 50%, rgba(212,175,55,0.03) 0%, transparent 70%)',
-        }}
-      />
+    <section id="venue" className="relative py-24 md:py-32 overflow-hidden">
+      {/* Background image with floral panels */}
+      <div className="absolute inset-0">
+        <Image src="/images/Gallery_Bg.png" alt="" fill className="object-cover object-center" aria-hidden="true" />
+        <div className="absolute inset-0 bg-bg/72" />
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         <ScrollReveal>
           <SectionTitle title="Venue" className="mb-14" />
         </ScrollReveal>
 
-        {/* Map + Venue image row */}
-        <div className="grid md:grid-cols-2 gap-5 mb-8">
-          {/* Map */}
-          <ScrollReveal delay={0.1} direction="right">
-            <div className="relative rounded-2xl overflow-hidden border border-[rgba(212,175,55,0.25)] bg-card shadow-card venue-map" style={{ minHeight: '320px' }}>
-              <iframe
-                src="https://maps.google.com/maps?q=Near+Shivaji+Statue,Hanamkonda,Warangal,Telangana&z=14&output=embed"
-                width="100%"
-                height="320"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Venue Location"
-                className="opacity-90"
-              />
-              {/* Get Directions button overlay */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
-                <a
-                  href="https://maps.google.com/?q=Near+Shivaji+Statue,Hanamkonda,Warangal,Telangana"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <motion.button
-                    whileHover={{ scale: 1.04, boxShadow: '0 0 22px rgba(212,175,55,0.45)' }}
-                    className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gold text-bg font-cinzel text-[10px] tracking-[0.22em] uppercase font-semibold shadow-gold-sm"
-                  >
-                    <Navigation size={13} strokeWidth={2.5} />
-                    Get Directions
-                  </motion.button>
-                </a>
-              </div>
-            </div>
-          </ScrollReveal>
+        {/* Venue cards */}
+        <div className="grid md:grid-cols-2 gap-6 mb-8">
+          {VENUES.map((venue, i) => (
+            <ScrollReveal key={venue.label} delay={i * 0.12} direction={i === 0 ? 'right' : 'left'}>
+              <motion.div
+                whileHover={{ borderColor: 'rgba(212,175,55,0.45)', boxShadow: '0 16px 48px rgba(0,0,0,0.55), 0 0 24px rgba(212,175,55,0.08)' }}
+                transition={{ duration: 0.3 }}
+                className="glass-card rounded-2xl overflow-hidden border border-[rgba(212,175,55,0.2)] shadow-card flex flex-col"
+              >
+                {/* Map */}
+                <div className="venue-map venue-map-container">
+                  <iframe
+                    src={venue.mapSrc}
+                    width="100%"
+                    height="100%"
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title={venue.label}
+                    className="opacity-90"
+                  />
+                </div>
 
-          {/* Venue image */}
-          <ScrollReveal delay={0.15} direction="left">
-            <div
-              className="relative rounded-2xl overflow-hidden border border-[rgba(212,175,55,0.25)] shadow-card bg-card"
-              style={{ minHeight: '320px' }}
-            >
-              <Image
-                src="https://picsum.photos/seed/venue-night/700/450"
-                alt="Wedding venue"
-                fill
-                className="object-cover"
-                style={{ filter: 'sepia(15%) saturate(120%) brightness(0.88)' }}
-              />
-              {/* Venue info overlay */}
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    'linear-gradient(180deg, transparent 40%, rgba(18,13,8,0.88) 100%)',
-                }}
-              />
-              <div className="absolute bottom-0 inset-x-0 p-6">
-                <p className="font-cinzel text-[10px] tracking-[0.25em] text-gold/80 uppercase mb-1">
-                  Wedding Venue
-                </p>
-                <h3 className="font-cormorant text-xl font-semibold text-warm-text/90 mb-0.5">
-                  Near Shivaji Statue
-                </h3>
-                <p className="font-inter text-xs text-warm-text/55">
-                  Ashallapally, Warangal, Telangana
-                </p>
-              </div>
-            </div>
-          </ScrollReveal>
+                {/* Divider */}
+                <div className="h-px w-full bg-gradient-to-r from-transparent via-[rgba(212,175,55,0.35)] to-transparent" />
+
+                {/* Details */}
+                <div className="p-6 flex flex-col gap-4 flex-1">
+                  {/* Label */}
+                  <p className="font-cinzel text-[9px] tracking-[0.3em] text-gold uppercase">
+                    {venue.label}
+                  </p>
+
+                  {/* Venue name */}
+                  <h3 className="font-cormorant text-2xl md:text-3xl font-semibold text-warm-text leading-tight -mt-1">
+                    {venue.name}
+                  </h3>
+
+                  {/* Date & time */}
+                  <div className="flex flex-col gap-1.5">
+                    <div className="flex items-center gap-2">
+                      <Calendar size={13} className="text-gold flex-shrink-0" strokeWidth={1.8} />
+                      <span className="font-inter text-xs text-warm-text/80">{venue.date}</span>
+                    </div>
+                    {venue.time && (
+                      <div className="flex items-center gap-2">
+                        <Clock size={13} className="text-gold flex-shrink-0" strokeWidth={1.8} />
+                        <span className="font-inter text-xs text-warm-text/80">{venue.time}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Address */}
+                  <div className="flex items-start gap-2">
+                    <MapPin size={13} className="text-gold flex-shrink-0 mt-0.5" strokeWidth={1.8} />
+                    <div className="flex flex-col gap-0.5">
+                      {venue.lines.map((line) => (
+                        <span key={line} className="font-inter text-xs text-warm-text/65 leading-relaxed">
+                          {line}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Directions button */}
+                  <div className="mt-auto pt-2">
+                    <a href={venue.mapsHref} target="_blank" rel="noopener noreferrer">
+                      <motion.button
+                        whileHover={{ scale: 1.03, boxShadow: '0 0 22px rgba(212,175,55,0.45)' }}
+                        whileTap={{ scale: 0.97 }}
+                        className="w-full flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-gold text-bg font-cinzel text-[9px] tracking-[0.22em] uppercase font-semibold shadow-gold-sm transition-all duration-300"
+                      >
+                        <Navigation size={12} strokeWidth={2.5} />
+                        Get Directions
+                      </motion.button>
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            </ScrollReveal>
+          ))}
         </div>
 
         {/* Feature cards */}
@@ -129,14 +156,7 @@ export default function VenueSection() {
                 transition={{ duration: 0.3 }}
                 className="glass-card rounded-xl p-5 flex flex-col items-center text-center gap-3 border border-[rgba(212,175,55,0.18)]"
               >
-                <div
-                  className="w-11 h-11 rounded-full flex items-center justify-center"
-                  style={{
-                    background:
-                      'radial-gradient(circle, rgba(212,175,55,0.18) 0%, rgba(212,175,55,0.05) 100%)',
-                    border: '1px solid rgba(212,175,55,0.3)',
-                  }}
-                >
+                <div className="venue-icon-circle w-11 h-11 rounded-full flex items-center justify-center">
                   {feature.icon}
                 </div>
                 <div>

@@ -73,8 +73,15 @@ export default function HeroSection() {
       </div>{/* end overflow-hidden wrapper */}
 
       {/* Overlay layers */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#120d08]/50 via-transparent to-[#120d08]/75 z-10" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#120d08]/40 via-transparent to-[#120d08]/40 z-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#120d08]/65 via-transparent to-[#120d08]/85 z-10" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#120d08]/50 via-transparent to-[#120d08]/50 z-10" />
+      {/* Dark scrim behind text to boost contrast over the bright temple center */}
+      <div
+        className="absolute z-10 inset-0"
+        style={{
+          background: 'radial-gradient(ellipse 75% 65% at 50% 42%, rgba(18,13,8,0.52) 0%, transparent 70%)',
+        }}
+      />
       {/* Warm glow behind where the temple sits */}
       <div
         className="absolute z-10 inset-0"
@@ -109,7 +116,8 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4 }}
-          className="font-cinzel text-[10px] md:text-xs tracking-[0.35em] text-gold/90 uppercase mb-6"
+          className="font-cinzel text-[10px] md:text-xs tracking-[0.35em] text-gold uppercase mb-6"
+          style={{ textShadow: '0 1px 8px rgba(18,13,8,0.8), 0 2px 16px rgba(18,13,8,0.6)' }}
         >
           Shubh Vivah ✦ Karkataka Lagnam
         </motion.p>
@@ -136,6 +144,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1 }}
           className="font-cinzel text-lg md:text-2xl lg:text-3xl tracking-[0.22em] text-light-gold mb-3"
+          style={{ textShadow: '0 2px 12px rgba(18,13,8,0.85), 0 4px 24px rgba(18,13,8,0.6)' }}
         >
           5TH JULY 2026
         </motion.p>
@@ -145,24 +154,39 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.15 }}
-          className="font-cormorant italic text-sm md:text-base lg:text-lg text-warm-text/65 tracking-[0.12em] uppercase mb-10"
+          className="font-cormorant italic text-sm md:text-base lg:text-lg text-warm-text/90 tracking-[0.12em] uppercase mb-10"
+          style={{ textShadow: '0 1px 8px rgba(18,13,8,0.9), 0 2px 16px rgba(18,13,8,0.7)' }}
         >
           Two Hearts, One Promise... A Lifetime Together
         </motion.p>
 
-        {/* CTA */}
-        <motion.button
+        {/* CTAs */}
+        <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.3 }}
-          whileHover={{ scale: 1.04, boxShadow: '0 0 32px rgba(212,175,55,0.38)' }}
-          whileTap={{ scale: 0.97 }}
-          onClick={() => document.querySelector('#couple')?.scrollIntoView({ behavior: 'smooth' })}
-          className="group flex items-center gap-3 px-8 py-3.5 rounded-full border border-[rgba(212,175,55,0.45)] bg-[rgba(18,13,8,0.55)] text-light-gold font-cinzel text-[10px] tracking-[0.3em] uppercase hover:bg-[rgba(212,175,55,0.12)] transition-all duration-400 backdrop-blur-sm"
+          className="flex flex-wrap items-center justify-center gap-3"
         >
-          Explore Our Journey
-          <span className="transition-transform duration-300 group-hover:translate-x-1.5">→</span>
-        </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.04, boxShadow: '0 0 32px rgba(212,175,55,0.38)' }}
+            whileTap={{ scale: 0.97 }}
+            onClick={() => document.querySelector('#couple')?.scrollIntoView({ behavior: 'smooth' })}
+            className="group flex items-center gap-3 px-8 py-3.5 rounded-full border border-[rgba(212,175,55,0.45)] bg-[rgba(18,13,8,0.55)] text-light-gold font-cinzel text-[10px] tracking-[0.3em] uppercase hover:bg-[rgba(212,175,55,0.12)] transition-all duration-400 backdrop-blur-sm"
+          >
+            Explore Our Journey
+            <span className="transition-transform duration-300 group-hover:translate-x-1.5">→</span>
+          </motion.button>
+
+          <motion.button
+            whileHover={{ scale: 1.04, boxShadow: '0 0 24px rgba(212,175,55,0.55)' }}
+            whileTap={{ scale: 0.97 }}
+            onClick={() => document.querySelector('#venue')?.scrollIntoView({ behavior: 'smooth' })}
+            className="flex items-center gap-2 px-8 py-3.5 rounded-full bg-gold text-bg font-cinzel text-[10px] tracking-[0.3em] uppercase font-semibold transition-all duration-400"
+          >
+            <MapPin size={13} strokeWidth={2.5} />
+            Venue
+          </motion.button>
+        </motion.div>
       </motion.div>
 
       {/* ── Scroll Down indicator ── */}

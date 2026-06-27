@@ -116,6 +116,15 @@ body {
   height: 100%;
 }
 
+.venue-map-container {
+  height: 240px;
+}
+
+.venue-icon-circle {
+  background: radial-gradient(circle, rgba(212,175,55,0.18) 0%, rgba(212,175,55,0.05) 100%);
+  border: 1px solid rgba(212,175,55,0.3);
+}
+
 /* ── Input autofill override ── */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
